@@ -8,41 +8,53 @@ import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interfa
 import { storycharacterFormComponents } from '../../formcomponents/storycharacter.formcomponents';
 import { firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
+import { StorylocationService } from 'src/app/modules/storylocation/services/storylocation.service';
+import { StorychangetypeService } from 'src/app/modules/storychangetype/services/storychangetype.service';
 
 @Component({
 	templateUrl: './characters.component.html',
 	styleUrls: ['./characters.component.scss'],
-	standalone: false,
+	standalone: false
 })
 export class CharactersComponent {
+	story = this._router.url.includes('/characters/')
+		? this._router.url.replace('/characters/', '')
+		: '';
 
-	story = this._router.url.includes('/characters/') ? this._router.url.replace('/characters/', '') : '';
+	columns = ['name', 'birth', 'location', 'type'];
 
-	columns = ['name', 'description'];
-
-	form: FormInterface = this._form.getForm('storycharacter', storycharacterFormComponents);
+	form: FormInterface = this._form.getForm(
+		'storycharacter',
+		storycharacterFormComponents
+	);
 
 	config = {
 		paginate: this.setRows.bind(this),
 		perPage: 20,
-		setPerPage: this._storycharacterService.setPerPage.bind(this._storycharacterService),
+		setPerPage: this._storycharacterService.setPerPage.bind(
+			this._storycharacterService
+		),
 		allDocs: false,
-		create: this.story ? (): void => {
-			this._form.modal<Storycharacter>(this.form, {
-				label: 'Create',
-				click: async (created: unknown, close: () => void) => {
-					close();
+		create: this.story
+			? (): void => {
+					this._form.modal<Storycharacter>(this.form, {
+						label: 'Create',
+						click: async (created: unknown, close: () => void) => {
+							close();
 
-					this._preCreate(created as Storycharacter);
+							this._preCreate(created as Storycharacter);
 
-					await firstValueFrom(
-						this._storycharacterService.create(created as Storycharacter)
-					);
+							await firstValueFrom(
+								this._storycharacterService.create(
+									created as Storycharacter
+								)
+							);
 
-					this.setRows();
-				},
-			});
-		} : null,
+							this.setRows();
+						}
+					});
+				}
+			: null,
 		update: (doc: Storycharacter): void => {
 			this._form
 				.modal<Storycharacter>(this.form, [], doc)
@@ -59,44 +71,54 @@ export class CharactersComponent {
 				),
 				buttons: [
 					{
-						text: this._translate.translate('Common.No'),
+						text: this._translate.translate('Common.No')
 					},
 					{
 						text: this._translate.translate('Common.Yes'),
 						callback: async (): Promise<void> => {
-							await firstValueFrom(this._storycharacterService.delete(doc));
+							await firstValueFrom(
+								this._storycharacterService.delete(doc)
+							);
 
 							this.setRows();
-						},
-					},
-				],
+						}
+					}
+				]
 			});
 		},
 		buttons: [
 			{
 				icon: 'cloud_download',
 				click: (doc: Storycharacter): void => {
-					this._form.modalUnique<Storycharacter>('storycharacter', 'url', doc);
-				},
-			},
+					this._form.modalUnique<Storycharacter>(
+						'storycharacter',
+						'url',
+						doc
+					);
+				}
+			}
 		],
 		headerButtons: [
-			this.story ? {
-				icon: 'playlist_add',
-				click: this._bulkManagement(),
-				class: 'playlist',
-			} : null,
+			this.story
+				? {
+						icon: 'playlist_add',
+						click: this._bulkManagement(),
+						class: 'playlist'
+					}
+				: null,
 			{
 				icon: 'edit_note',
 				click: this._bulkManagement(false),
-				class: 'edit',
-			},
-		],
+				class: 'edit'
+			}
+		]
 	};
 
 	rows: Storycharacter[] = [];
 
 	constructor(
+		public locationService: StorylocationService,
+		public typeService: StorychangetypeService,
 		private _storycharacterService: StorycharacterService,
 		private _translate: TranslateService,
 		private _alert: AlertService,
@@ -135,38 +157,53 @@ export class CharactersComponent {
 							this._preCreate(storycharacter);
 
 							await firstValueFrom(
-								this._storycharacterService.create(storycharacter)
+								this._storycharacterService.create(
+									storycharacter
+								)
 							);
 						}
 					} else {
 						for (const storycharacter of this.rows) {
 							if (
 								!storycharacters.find(
-									(localStorycharacter) => localStorycharacter._id === storycharacter._id
+									(localStorycharacter) =>
+										localStorycharacter._id ===
+										storycharacter._id
 								)
 							) {
 								await firstValueFrom(
-									this._storycharacterService.delete(storycharacter)
+									this._storycharacterService.delete(
+										storycharacter
+									)
 								);
 							}
 						}
 
 						for (const storycharacter of storycharacters) {
 							const localStorycharacter = this.rows.find(
-								(localStorycharacter) => localStorycharacter._id === storycharacter._id
+								(localStorycharacter) =>
+									localStorycharacter._id ===
+									storycharacter._id
 							);
 
 							if (localStorycharacter) {
-								this._core.copy(storycharacter, localStorycharacter);
+								this._core.copy(
+									storycharacter,
+									localStorycharacter
+								);
 
 								await firstValueFrom(
-									this._storycharacterService.update(localStorycharacter)
+									this._storycharacterService.update(
+										localStorycharacter
+									)
 								);
 							} else if (this.story) {
 								this._preCreate(storycharacter);
 
 								await firstValueFrom(
-									this._storycharacterService.create(storycharacter)
+									this._storycharacterService.create(
+										storycharacter
+									)
 								);
 							}
 						}

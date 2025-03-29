@@ -115,7 +115,7 @@
 					(click)="hideSidebar()"
 				>
 					<span class="material-icons">style</span>
-					<span translate>Theme.Types</span>
+					<span translate>Theme.Change types</span>
 				</a>
 				<a
 					[routerLinkActiveOptions]="{ exact: true }"
@@ -136,6 +136,16 @@
 				>
 					<span class="material-icons">person</span>
 					<span translate>Theme.Characters</span>
+				</a>
+				<a
+					[routerLinkActiveOptions]="{ exact: true }"
+					routerLinkActive="_activeLink"
+					routerLink="/events"
+					class="nav__burger-link"
+					(click)="hideSidebar()"
+				>
+					<span class="material-icons">event</span>
+					<span translate>Theme.Events</span>
 				</a>
 				<hr />
 			</div>

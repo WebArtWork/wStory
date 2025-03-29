@@ -51,6 +51,16 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'events',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Events'
+					}
+				},
+				loadChildren: () => import('./modules/storyevent/pages/events/events.module').then(m => m.EventsModule)
+			}, 
+			{
 				path: 'world',
 				canActivate: [MetaGuard],
 				data: {
