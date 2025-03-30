@@ -86,6 +86,24 @@ export class EventsComponent {
 		},
 		buttons: [
 			{
+				icon: 'arrow_upward',
+				click: (doc: Storyevent): void => {
+					const index = this.rows.findIndex((d) => d._id === doc._id);
+
+					[this.rows[index], this.rows[index - 1]] = [
+						this.rows[index - 1],
+						this.rows[index]
+					];
+
+					for (let i = 0; i < this.rows.length; i++) {
+						if (this.rows[i].order !== i) {
+							this.rows[i].order = i;
+							this._storyeventService.update(this.rows[i]);
+						}
+					}
+				}
+			},
+			{
 				icon: 'cloud_download',
 				click: (doc: Storyevent): void => {
 					this._form.modalUnique<Storyevent>(

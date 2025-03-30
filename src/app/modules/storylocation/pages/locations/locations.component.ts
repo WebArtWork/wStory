@@ -12,36 +12,47 @@ import { Router } from '@angular/router';
 @Component({
 	templateUrl: './locations.component.html',
 	styleUrls: ['./locations.component.scss'],
-	standalone: false,
+	standalone: false
 })
 export class LocationsComponent {
 	columns = ['name'];
 
-	story = this._router.url.includes('/locations/') ? this._router.url.replace('/locations/', '') : '';
+	story = this._router.url.includes('/locations/')
+		? this._router.url.replace('/locations/', '')
+		: '';
 
-	form: FormInterface = this._form.getForm('storylocation', storylocationFormComponents);
+	form: FormInterface = this._form.getForm(
+		'storylocation',
+		storylocationFormComponents
+	);
 
 	config = {
 		paginate: this.setRows.bind(this),
 		perPage: 20,
-		setPerPage: this._storylocationService.setPerPage.bind(this._storylocationService),
+		setPerPage: this._storylocationService.setPerPage.bind(
+			this._storylocationService
+		),
 		allDocs: false,
-		create: this.story ? (): void => {
-			this._form.modal<Storylocation>(this.form, {
-				label: 'Create',
-				click: async (created: unknown, close: () => void) => {
-					close();
+		create: this.story
+			? (): void => {
+					this._form.modal<Storylocation>(this.form, {
+						label: 'Create',
+						click: async (created: unknown, close: () => void) => {
+							close();
 
-					this._preCreate(created as Storylocation);
+							this._preCreate(created as Storylocation);
 
-					await firstValueFrom(
-						this._storylocationService.create(created as Storylocation)
-					);
+							await firstValueFrom(
+								this._storylocationService.create(
+									created as Storylocation
+								)
+							);
 
-					this.setRows();
-				},
-			});
-		} : null,
+							this.setRows();
+						}
+					});
+				}
+			: null,
 		update: (doc: Storylocation): void => {
 			this._form
 				.modal<Storylocation>(this.form, [], doc)
@@ -58,39 +69,65 @@ export class LocationsComponent {
 				),
 				buttons: [
 					{
-						text: this._translate.translate('Common.No'),
+						text: this._translate.translate('Common.No')
 					},
 					{
 						text: this._translate.translate('Common.Yes'),
 						callback: async (): Promise<void> => {
-							await firstValueFrom(this._storylocationService.delete(doc));
+							await firstValueFrom(
+								this._storylocationService.delete(doc)
+							);
 
 							this.setRows();
-						},
-					},
-				],
+						}
+					}
+				]
 			});
 		},
 		buttons: [
 			{
+				icon: 'arrow_upward',
+				click: (doc: Storylocation): void => {
+					const index = this.rows.findIndex((d) => d._id === doc._id);
+
+					[this.rows[index], this.rows[index - 1]] = [
+						this.rows[index - 1],
+						this.rows[index]
+					];
+
+					for (let i = 0; i < this.rows.length; i++) {
+						if (this.rows[i].order !== i) {
+							this.rows[i].order = i;
+							this._storylocationService.update(this.rows[i]);
+						}
+					}
+				}
+			},
+			{
 				icon: 'cloud_download',
 				click: (doc: Storylocation): void => {
-					this._form.modalUnique<Storylocation>('storylocation', 'url', doc);
-				},
-			},
+					this._form.modalUnique<Storylocation>(
+						'storylocation',
+						'url',
+						doc
+					);
+				}
+			}
 		],
 		headerButtons: [
-			this.story ? {
-				icon: 'playlist_add',
-				click: this._bulkManagement(),
-				class: 'playlist',
-			} : null,
+			this.story
+				? {
+						icon: 'playlist_add',
+						click: this._bulkManagement(),
+						class: 'playlist'
+					}
+				: null,
 			{
 				icon: 'edit_note',
 				click: this._bulkManagement(false),
-				class: 'edit',
-			},
-		],
+				class: 'edit'
+			}
+		]
 	};
 
 	rows: Storylocation[] = [];
@@ -141,31 +178,43 @@ export class LocationsComponent {
 						for (const storylocation of this.rows) {
 							if (
 								!storylocations.find(
-									(localStorylocation) => localStorylocation._id === storylocation._id
+									(localStorylocation) =>
+										localStorylocation._id ===
+										storylocation._id
 								)
 							) {
 								await firstValueFrom(
-									this._storylocationService.delete(storylocation)
+									this._storylocationService.delete(
+										storylocation
+									)
 								);
 							}
 						}
 
 						for (const storylocation of storylocations) {
 							const localStorylocation = this.rows.find(
-								(localStorylocation) => localStorylocation._id === storylocation._id
+								(localStorylocation) =>
+									localStorylocation._id === storylocation._id
 							);
 
 							if (localStorylocation) {
-								this._core.copy(storylocation, localStorylocation);
+								this._core.copy(
+									storylocation,
+									localStorylocation
+								);
 
 								await firstValueFrom(
-									this._storylocationService.update(localStorylocation)
+									this._storylocationService.update(
+										localStorylocation
+									)
 								);
 							} else {
 								this._preCreate(storylocation);
 
 								await firstValueFrom(
-									this._storylocationService.create(storylocation)
+									this._storylocationService.create(
+										storylocation
+									)
 								);
 							}
 						}

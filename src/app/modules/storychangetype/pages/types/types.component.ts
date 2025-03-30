@@ -13,38 +13,49 @@ import { StorychangeService } from 'src/app/modules/storychange/services/storych
 @Component({
 	templateUrl: './types.component.html',
 	styleUrls: ['./types.component.scss'],
-	standalone: false,
+	standalone: false
 })
 export class TypesComponent {
-	change = this._router.url.includes('/types/') ? this._router.url.replace('/types/', '') : '';
+	change = this._router.url.includes('/types/')
+		? this._router.url.replace('/types/', '')
+		: '';
 
 	story: string;
 
 	columns = ['name'];
 
-	form: FormInterface = this._form.getForm('storychangetype', storychangetypeFormComponents);
+	form: FormInterface = this._form.getForm(
+		'storychangetype',
+		storychangetypeFormComponents
+	);
 
 	config = {
 		paginate: this.setRows.bind(this),
 		perPage: 20,
-		setPerPage: this._storychangetypeService.setPerPage.bind(this._storychangetypeService),
+		setPerPage: this._storychangetypeService.setPerPage.bind(
+			this._storychangetypeService
+		),
 		allDocs: false,
-		create: this.change ? (): void => {
-			this._form.modal<Storychangetype>(this.form, {
-				label: 'Create',
-				click: async (created: unknown, close: () => void) => {
-					close();
+		create: this.change
+			? (): void => {
+					this._form.modal<Storychangetype>(this.form, {
+						label: 'Create',
+						click: async (created: unknown, close: () => void) => {
+							close();
 
-					this._preCreate(created as Storychangetype);
+							this._preCreate(created as Storychangetype);
 
-					await firstValueFrom(
-						this._storychangetypeService.create(created as Storychangetype)
-					);
+							await firstValueFrom(
+								this._storychangetypeService.create(
+									created as Storychangetype
+								)
+							);
 
-					this.setRows();
-				},
-			});
-		} : null,
+							this.setRows();
+						}
+					});
+				}
+			: null,
 		update: (doc: Storychangetype): void => {
 			this._form
 				.modal<Storychangetype>(this.form, [], doc)
@@ -61,39 +72,65 @@ export class TypesComponent {
 				),
 				buttons: [
 					{
-						text: this._translate.translate('Common.No'),
+						text: this._translate.translate('Common.No')
 					},
 					{
 						text: this._translate.translate('Common.Yes'),
 						callback: async (): Promise<void> => {
-							await firstValueFrom(this._storychangetypeService.delete(doc));
+							await firstValueFrom(
+								this._storychangetypeService.delete(doc)
+							);
 
 							this.setRows();
-						},
-					},
-				],
+						}
+					}
+				]
 			});
 		},
 		buttons: [
 			{
+				icon: 'arrow_upward',
+				click: (doc: Storychangetype): void => {
+					const index = this.rows.findIndex((d) => d._id === doc._id);
+
+					[this.rows[index], this.rows[index - 1]] = [
+						this.rows[index - 1],
+						this.rows[index]
+					];
+
+					for (let i = 0; i < this.rows.length; i++) {
+						if (this.rows[i].order !== i) {
+							this.rows[i].order = i;
+							this._storychangetypeService.update(this.rows[i]);
+						}
+					}
+				}
+			},
+			{
 				icon: 'cloud_download',
 				click: (doc: Storychangetype): void => {
-					this._form.modalUnique<Storychangetype>('storychangetype', 'url', doc);
-				},
-			},
+					this._form.modalUnique<Storychangetype>(
+						'storychangetype',
+						'url',
+						doc
+					);
+				}
+			}
 		],
 		headerButtons: [
-			this.change ? {
-				icon: 'playlist_add',
-				click: this._bulkManagement(),
-				class: 'playlist',
-			} : null,
+			this.change
+				? {
+						icon: 'playlist_add',
+						click: this._bulkManagement(),
+						class: 'playlist'
+					}
+				: null,
 			{
 				icon: 'edit_note',
 				click: this._bulkManagement(false),
-				class: 'edit',
-			},
-		],
+				class: 'edit'
+			}
+		]
 	};
 
 	rows: Storychangetype[] = [];
@@ -110,13 +147,15 @@ export class TypesComponent {
 		this.setRows();
 
 		if (this.change) {
-			this._storychangeService.fetch({
-				_id: this.change
-			}).subscribe((change)=>{
-				if (change) {
-					this.story = change.story;
-				}
-			});
+			this._storychangeService
+				.fetch({
+					_id: this.change
+				})
+				.subscribe((change) => {
+					if (change) {
+						this.story = change.story;
+					}
+				});
 		}
 	}
 
@@ -148,38 +187,53 @@ export class TypesComponent {
 							this._preCreate(storychangetype);
 
 							await firstValueFrom(
-								this._storychangetypeService.create(storychangetype)
+								this._storychangetypeService.create(
+									storychangetype
+								)
 							);
 						}
 					} else {
 						for (const storychangetype of this.rows) {
 							if (
 								!storychangetypes.find(
-									(localStorychangetype) => localStorychangetype._id === storychangetype._id
+									(localStorychangetype) =>
+										localStorychangetype._id ===
+										storychangetype._id
 								)
 							) {
 								await firstValueFrom(
-									this._storychangetypeService.delete(storychangetype)
+									this._storychangetypeService.delete(
+										storychangetype
+									)
 								);
 							}
 						}
 
 						for (const storychangetype of storychangetypes) {
 							const localStorychangetype = this.rows.find(
-								(localStorychangetype) => localStorychangetype._id === storychangetype._id
+								(localStorychangetype) =>
+									localStorychangetype._id ===
+									storychangetype._id
 							);
 
 							if (localStorychangetype) {
-								this._core.copy(storychangetype, localStorychangetype);
+								this._core.copy(
+									storychangetype,
+									localStorychangetype
+								);
 
 								await firstValueFrom(
-									this._storychangetypeService.update(localStorychangetype)
+									this._storychangetypeService.update(
+										localStorychangetype
+									)
 								);
 							} else if (this.story) {
 								this._preCreate(storychangetype);
 
 								await firstValueFrom(
-									this._storychangetypeService.create(storychangetype)
+									this._storychangetypeService.create(
+										storychangetype
+									)
 								);
 							}
 						}

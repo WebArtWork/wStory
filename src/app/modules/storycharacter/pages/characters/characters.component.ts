@@ -88,6 +88,24 @@ export class CharactersComponent {
 		},
 		buttons: [
 			{
+				icon: 'arrow_upward',
+				click: (doc: Storycharacter): void => {
+					const index = this.rows.findIndex((d) => d._id === doc._id);
+
+					[this.rows[index], this.rows[index - 1]] = [
+						this.rows[index - 1],
+						this.rows[index]
+					];
+
+					for (let i = 0; i < this.rows.length; i++) {
+						if (this.rows[i].order !== i) {
+							this.rows[i].order = i;
+							this._storycharacterService.update(this.rows[i]);
+						}
+					}
+				}
+			},
+			{
 				icon: 'cloud_download',
 				click: (doc: Storycharacter): void => {
 					this._form.modalUnique<Storycharacter>(
