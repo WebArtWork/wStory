@@ -1,22 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CoreModule } from 'src/app/core/core.module';
-import { EventsComponent } from './events.component';
+import { EventComponent } from './event.component';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
 	{
-		path: '',
-		component: EventsComponent
-	},
-	{
-		path: ':story',
-		component: EventsComponent
+		path: ':_id',
+		component: EventComponent
 	}
 ];
 
 @NgModule({
 	imports: [RouterModule.forChild(routes), CoreModule],
-	declarations: [EventsComponent],
-	providers: []
+	declarations: [EventComponent]
 })
-export class EventsModule {}
+export class EventModule {}

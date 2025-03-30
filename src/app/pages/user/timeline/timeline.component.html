@@ -1,0 +1,43 @@
+<div class="documents-wrapper">
+	<div class="documents-container">
+		<div class="documents-list">
+			<div class="documents-main">
+				<div class="documents-main-content">
+					<ng-container *ngFor="let story of stories">
+						<div
+							*ngIf="(events|events: story._id).length"
+							class="documents-main-row"
+						>
+							<div class="documents__title">{{story.name}}</div>
+							<div class="documents-triggers">
+								<div
+									*ngFor="let event of events|events: story._id"
+									routerLink="/event/{{event._id}}"
+									class="documents-triggers__wrap"
+								>
+									<div class="documents-triggers__item">
+										<div class="documents-triggers__img">
+											<img
+												[src]="event.thumb ? url + event.thumb : '/assets/default.png'"
+												alt=""
+											/>
+										</div>
+										<div class="documents-triggers__title">
+											{{event.name}}
+										</div>
+										<!-- <div
+										class="documents-triggers__description"
+									>
+										Lorem ipsum dolor sit amet consectetur
+										adipisicing elit
+									</div> -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</ng-container>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

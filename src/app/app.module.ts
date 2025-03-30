@@ -20,7 +20,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: '/sign',
+		redirectTo: '/worlds',
 		pathMatch: 'full'
 	},
 	{
@@ -58,28 +58,11 @@ const routes: Routes = [
 						title: 'Events'
 					}
 				},
-				loadChildren: () => import('./modules/storyevent/pages/events/events.module').then(m => m.EventsModule)
-			}, 
-			{
-				path: 'world',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'World'
-					}
-				},
-				loadChildren: () => import('./pages/user/world/world.module').then(m => m.WorldModule)
-			}, 
-			{
-				path: 'worlds',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Worlds'
-					}
-				},
-				loadChildren: () => import('./pages/user/worlds/worlds.module').then(m => m.WorldsModule)
-			}, 
+				loadChildren: () =>
+					import(
+						'./modules/storyevent/pages/events/events.module'
+					).then((m) => m.EventsModule)
+			},
 			{
 				path: 'characters',
 				canActivate: [MetaGuard],
@@ -88,8 +71,11 @@ const routes: Routes = [
 						title: 'Characters'
 					}
 				},
-				loadChildren: () => import('./modules/storycharacter/pages/characters/characters.module').then(m => m.CharactersModule)
-			}, 
+				loadChildren: () =>
+					import(
+						'./modules/storycharacter/pages/characters/characters.module'
+					).then((m) => m.CharactersModule)
+			},
 			{
 				path: 'locations',
 				canActivate: [MetaGuard],
@@ -98,8 +84,11 @@ const routes: Routes = [
 						title: 'Locations'
 					}
 				},
-				loadChildren: () => import('./modules/storylocation/pages/locations/locations.module').then(m => m.LocationsModule)
-			}, 
+				loadChildren: () =>
+					import(
+						'./modules/storylocation/pages/locations/locations.module'
+					).then((m) => m.LocationsModule)
+			},
 			{
 				path: 'types',
 				canActivate: [MetaGuard],
@@ -108,8 +97,11 @@ const routes: Routes = [
 						title: 'Types'
 					}
 				},
-				loadChildren: () => import('./modules/storychangetype/pages/types/types.module').then(m => m.TypesModule)
-			}, 
+				loadChildren: () =>
+					import(
+						'./modules/storychangetype/pages/types/types.module'
+					).then((m) => m.TypesModule)
+			},
 			{
 				path: 'changes',
 				canActivate: [MetaGuard],
@@ -118,8 +110,11 @@ const routes: Routes = [
 						title: 'Changes'
 					}
 				},
-				loadChildren: () => import('./modules/storychange/pages/changes/changes.module').then(m => m.ChangesModule)
-			}, 
+				loadChildren: () =>
+					import(
+						'./modules/storychange/pages/changes/changes.module'
+					).then((m) => m.ChangesModule)
+			},
 			{
 				path: 'stories',
 				canActivate: [MetaGuard],
@@ -128,8 +123,24 @@ const routes: Routes = [
 						title: 'Stories'
 					}
 				},
-				loadChildren: () => import('./modules/story/pages/stories/stories.module').then(m => m.StoriesModule)
-			}, 
+				loadChildren: () =>
+					import('./modules/story/pages/stories/stories.module').then(
+						(m) => m.StoriesModule
+					)
+			},
+			{
+				path: 'files',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Files'
+					}
+				},
+				loadChildren: () =>
+					import('./core/modules/file/pages/files/files.module').then(
+						(m) => m.FilesModule
+					)
+			},
 			{
 				path: 'profile',
 				canActivate: [MetaGuard],
@@ -149,7 +160,58 @@ const routes: Routes = [
 		path: '',
 		component: PublicComponent,
 		children: [
-			/* user */
+			{
+				path: 'timeline',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Timeline'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/timeline/timeline.module').then(
+						(m) => m.TimelineModule
+					)
+			},
+			{
+				path: 'event',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Event'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/event/event.module').then(
+						(m) => m.EventModule
+					)
+			},
+			{
+				path: 'world',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'World'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/world/world.module').then(
+						(m) => m.WorldModule
+					)
+			},
+			{
+				path: 'worlds',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Worlds'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/worlds/worlds.module').then(
+						(m) => m.WorldsModule
+					)
+			},
 			{
 				path: 'document',
 				canActivate: [MetaGuard],
@@ -227,7 +289,7 @@ const routes: Routes = [
 	},
 	{
 		path: '**',
-		redirectTo: 'profile',
+		redirectTo: 'worlds',
 		pathMatch: 'full'
 	}
 ];

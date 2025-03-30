@@ -51,6 +51,32 @@
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
+					<div class="documents-main-row">
+						<div class="documents__title">Stories</div>
+						<div class="documents-triggers">
+							<div
+								routerLink="/event/{{event._id}}"
+								class="documents-triggers__wrap"
+								*ngFor="let event of events"
+							>
+								<div class="documents-triggers__item">
+									<div class="documents-triggers__img">
+										<img
+											[src]="event.thumb ? url + event.thumb : '/assets/default.png'"
+											alt=""
+										/>
+									</div>
+									<div class="documents-triggers__title">
+										{{event.name}}
+									</div>
+									<!-- <div
+										class="documents-triggers__description"
+										[innerHTML]="event.description"
+									></div> -->
+								</div>
+							</div>
+						</div>
+					</div>
 					<div
 						*ngFor="let change of changes"
 						class="documents-main-row"

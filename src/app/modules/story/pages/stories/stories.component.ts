@@ -11,7 +11,7 @@ import { firstValueFrom } from 'rxjs';
 @Component({
 	templateUrl: './stories.component.html',
 	styleUrls: ['./stories.component.scss'],
-	standalone: false,
+	standalone: false
 })
 export class StoriesComponent {
 	columns = ['name', 'description'];
@@ -36,7 +36,7 @@ export class StoriesComponent {
 					);
 
 					this.setRows();
-				},
+				}
 			});
 		},
 		update: (doc: Story): void => {
@@ -55,17 +55,19 @@ export class StoriesComponent {
 				),
 				buttons: [
 					{
-						text: this._translate.translate('Common.No'),
+						text: this._translate.translate('Common.No')
 					},
 					{
 						text: this._translate.translate('Common.Yes'),
 						callback: async (): Promise<void> => {
-							await firstValueFrom(this._storyService.delete(doc));
+							await firstValueFrom(
+								this._storyService.delete(doc)
+							);
 
 							this.setRows();
-						},
-					},
-				],
+						}
+					}
+				]
 			});
 		},
 		buttons: [
@@ -73,39 +75,45 @@ export class StoriesComponent {
 				icon: 'track_changes',
 				hrefFunc: (doc: Story): string => {
 					return '/changes/' + doc._id;
-				},
+				}
 			},
 			{
 				icon: 'place',
 				hrefFunc: (doc: Story): string => {
 					return '/locations/' + doc._id;
-				},
+				}
 			},
 			{
 				icon: 'person',
 				hrefFunc: (doc: Story): string => {
 					return '/characters/' + doc._id;
-				},
+				}
+			},
+			{
+				icon: 'event',
+				hrefFunc: (doc: Story): string => {
+					return '/events/' + doc._id;
+				}
 			},
 			{
 				icon: 'cloud_download',
 				click: (doc: Story): void => {
 					this._form.modalUnique<Story>('story', 'url', doc);
-				},
-			},
+				}
+			}
 		],
 		headerButtons: [
 			{
 				icon: 'playlist_add',
 				click: this._bulkManagement(),
-				class: 'playlist',
+				class: 'playlist'
 			},
 			{
 				icon: 'edit_note',
 				click: this._bulkManagement(false),
-				class: 'edit',
-			},
-		],
+				class: 'edit'
+			}
+		]
 	};
 
 	rows: Story[] = [];

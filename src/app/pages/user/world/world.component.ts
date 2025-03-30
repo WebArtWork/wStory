@@ -13,6 +13,8 @@ import { Storycharacter } from 'src/app/modules/storycharacter/interfaces/storyc
 import { Storylocation } from 'src/app/modules/storylocation/interfaces/storylocation.interface';
 import { Storychange } from 'src/app/modules/storychange/interfaces/storychange.interface';
 import { Storychangetype } from 'src/app/modules/storychangetype/interfaces/storychangetype.interface';
+import { StoryeventService } from 'src/app/modules/storyevent/services/storyevent.service';
+import { Storyevent } from 'src/app/modules/storyevent/interfaces/storyevent.interface';
 
 @Component({
 	templateUrl: './world.component.html',
@@ -103,11 +105,14 @@ export class WorldComponent {
 
 	changes: Storychange[] = [];
 
+	events: Storyevent[] = [];
+
 	constructor(
-		private _storycharacterService: StorycharacterService,
-		private _storylocationService: StorylocationService,
-		private _storytypeService: StorychangetypeService,
-		private _storychangeService: StorychangeService,
+		private _characterService: StorycharacterService,
+		private _locationService: StorylocationService,
+		private _typeService: StorychangetypeService,
+		private _changeService: StorychangeService,
+		private _eventService: StoryeventService,
 		private _storyService: StoryService,
 		public userService: UserService,
 		private _form: FormService,
@@ -122,7 +127,7 @@ export class WorldComponent {
 			)
 			.subscribe((story) => (this.story = story));
 
-		this._storycharacterService
+		this._characterService
 			.get(
 				{
 					query: 'story=' + this.storyId
@@ -130,7 +135,7 @@ export class WorldComponent {
 				{ name: 'public' }
 			)
 			.subscribe((characters) => (this.characters = characters));
-		this._storylocationService
+		this._locationService
 			.get(
 				{
 					query: 'story=' + this.storyId
@@ -138,7 +143,7 @@ export class WorldComponent {
 				{ name: 'public' }
 			)
 			.subscribe((locations) => (this.locations = locations));
-		this._storytypeService
+		this._typeService
 			.get(
 				{
 					query: 'story=' + this.storyId
@@ -146,7 +151,7 @@ export class WorldComponent {
 				{ name: 'public' }
 			)
 			.subscribe((types) => (this.types = types));
-		this._storychangeService
+		this._changeService
 			.get(
 				{
 					query: 'story=' + this.storyId
@@ -154,6 +159,14 @@ export class WorldComponent {
 				{ name: 'public' }
 			)
 			.subscribe((changes) => (this.changes = changes));
+		this._eventService
+			.get(
+				{
+					query: 'story=' + this.storyId
+				},
+				{ name: 'public' }
+			)
+			.subscribe((events) => (this.events = events));
 	}
 
 	back(): void {

@@ -8,7 +8,17 @@
 					routerLink="/worlds"
 					class="nav__a"
 				>
-					<span class="material-icons">home</span>
+					<span class="material-icons">public</span>
+				</a>
+			</li>
+			<li class="nav__li">
+				<a
+					routerLinkActive="_activeLink"
+					(click)="showSidebar = false"
+					routerLink="/timeline"
+					class="nav__a"
+				>
+					<span class="material-icons">menu_book</span>
 				</a>
 			</li>
 			<li class="nav__li _burger" (click)="showSidebar = !showSidebar">
