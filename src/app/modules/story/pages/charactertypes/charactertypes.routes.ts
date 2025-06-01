@@ -4,6 +4,10 @@ import { CharactertypesComponent } from './charactertypes.component';
 export const charactertypesRoutes: Routes = [
 	{
 		path: '',
-		component: CharactertypesComponent,
+		component: CharactertypesComponent
 	},
+	{
+		path: ':story',
+		component: CharactertypesComponent
+	}
 ];
