@@ -24,7 +24,7 @@ export class CharactertypesComponent extends CrudComponent<
 		? this._router.url.replace('/character/types/', '')
 		: '';
 
-	columns = ['name', 'description'];
+	columns = ['name', 'entities'];
 
 	config = this.getConfig();
 

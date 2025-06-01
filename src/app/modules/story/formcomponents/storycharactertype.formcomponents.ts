@@ -18,22 +18,26 @@ export const storycharactertypeFormComponents = {
 			]
 		},
 		{
-			name: 'Text',
-			key: 'description',
+			name: 'Select',
+			key: 'field',
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill storycharactertype description'
+					value: 'fill character type field ...'
 				},
 				{
 					name: 'Label',
-					value: 'Description'
+					value: 'Field'
+				},
+				{
+					name: 'Items',
+					value: ['Text', 'Number', 'Select', 'Multiple']
 				}
 			]
 		},
 		{
 			name: 'Tags',
-			key: 'data.entities',
+			key: 'entities',
 			fields: [
 				{
 					name: 'Placeholder',
