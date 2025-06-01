@@ -9,11 +9,11 @@ export const storycharactertypeFormComponents = {
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill storycharactertype title',
+					value: 'fill storycharactertype title'
 				},
 				{
 					name: 'Label',
-					value: 'Title',
+					value: 'Title'
 				}
 			]
 		},
@@ -23,13 +23,27 @@ export const storycharactertypeFormComponents = {
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill storycharactertype description',
+					value: 'fill storycharactertype description'
 				},
 				{
 					name: 'Label',
-					value: 'Description',
+					value: 'Description'
+				}
+			]
+		},
+		{
+			name: 'Tags',
+			key: 'data.entities',
+			fields: [
+				{
+					name: 'Placeholder',
+					value: 'enter character type entities ...'
+				},
+				{
+					name: 'Label',
+					value: 'Entities'
 				}
 			]
 		}
 	]
-}
+};
