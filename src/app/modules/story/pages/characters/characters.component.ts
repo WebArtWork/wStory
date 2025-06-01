@@ -156,7 +156,7 @@ export class CharactersComponent {
 
 				this.form.components.push({
 					name: type.field,
-					key: '' + type.name,
+					key: 'data.' + type.name,
 					fields: [
 						{
 							name: 'Placeholder',
