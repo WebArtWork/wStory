@@ -174,8 +174,6 @@ export class CharactersComponent {
 				});
 			}
 
-			console.log(types, this.form.components);
-
 			this.showTable = true;
 		});
 	}
