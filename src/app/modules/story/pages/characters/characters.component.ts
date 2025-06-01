@@ -8,8 +8,8 @@ import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interfa
 import { storycharacterFormComponents } from '../../formcomponents/storycharacter.formcomponents';
 import { firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
-import { StorylocationService } from 'src/app/modules/storylocation/services/storylocation.service';
-import { StorychangetypeService } from 'src/app/modules/storychangetype/services/storychangetype.service';
+import { StorylocationService } from 'src/app/modules/story/services/storylocation.service';
+import { StorychangetypeService } from 'src/app/modules/story/services/storychangetype.service';
 
 @Component({
 	templateUrl: './characters.component.html',

@@ -51,6 +51,19 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'character/types',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Charactertypes'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/story/pages/charactertypes/charactertypes.routes'
+					).then((r) => r.charactertypesRoutes)
+			},
+			{
 				path: 'events',
 				canActivate: [MetaGuard],
 				data: {
@@ -59,9 +72,9 @@ const routes: Routes = [
 					}
 				},
 				loadChildren: () =>
-					import(
-						'./modules/storyevent/pages/events/events.module'
-					).then((m) => m.EventsModule)
+					import('./modules/story/pages/events/events.module').then(
+						(m) => m.EventsModule
+					)
 			},
 			{
 				path: 'characters',
@@ -73,7 +86,7 @@ const routes: Routes = [
 				},
 				loadChildren: () =>
 					import(
-						'./modules/storycharacter/pages/characters/characters.module'
+						'./modules/story/pages/characters/characters.module'
 					).then((m) => m.CharactersModule)
 			},
 			{
@@ -86,11 +99,11 @@ const routes: Routes = [
 				},
 				loadChildren: () =>
 					import(
-						'./modules/storylocation/pages/locations/locations.module'
+						'./modules/story/pages/locations/locations.module'
 					).then((m) => m.LocationsModule)
 			},
 			{
-				path: 'types',
+				path: 'change/types',
 				canActivate: [MetaGuard],
 				data: {
 					meta: {
@@ -98,9 +111,9 @@ const routes: Routes = [
 					}
 				},
 				loadChildren: () =>
-					import(
-						'./modules/storychangetype/pages/types/types.module'
-					).then((m) => m.TypesModule)
+					import('./modules/story/pages/types/types.module').then(
+						(m) => m.TypesModule
+					)
 			},
 			{
 				path: 'changes',
@@ -111,9 +124,9 @@ const routes: Routes = [
 					}
 				},
 				loadChildren: () =>
-					import(
-						'./modules/storychange/pages/changes/changes.module'
-					).then((m) => m.ChangesModule)
+					import('./modules/story/pages/changes/changes.module').then(
+						(m) => m.ChangesModule
+					)
 			},
 			{
 				path: 'stories',

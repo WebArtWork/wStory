@@ -5,16 +5,16 @@ import { FormService } from 'src/app/core/modules/form/form.service';
 import { StoryService } from 'src/app/modules/story/services/story.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { StorychangetypeService } from 'src/app/modules/storychangetype/services/storychangetype.service';
-import { StorychangeService } from 'src/app/modules/storychange/services/storychange.service';
-import { StorylocationService } from 'src/app/modules/storylocation/services/storylocation.service';
-import { StorycharacterService } from 'src/app/modules/storycharacter/services/storycharacter.service';
-import { Storycharacter } from 'src/app/modules/storycharacter/interfaces/storycharacter.interface';
-import { Storylocation } from 'src/app/modules/storylocation/interfaces/storylocation.interface';
-import { Storychange } from 'src/app/modules/storychange/interfaces/storychange.interface';
-import { Storychangetype } from 'src/app/modules/storychangetype/interfaces/storychangetype.interface';
-import { StoryeventService } from 'src/app/modules/storyevent/services/storyevent.service';
-import { Storyevent } from 'src/app/modules/storyevent/interfaces/storyevent.interface';
+import { StorychangetypeService } from 'src/app/modules/story/services/storychangetype.service';
+import { StorychangeService } from 'src/app/modules/story/services/storychange.service';
+import { StorylocationService } from 'src/app/modules/story/services/storylocation.service';
+import { StorycharacterService } from 'src/app/modules/story/services/storycharacter.service';
+import { Storycharacter } from 'src/app/modules/story/interfaces/storycharacter.interface';
+import { Storylocation } from 'src/app/modules/story/interfaces/storylocation.interface';
+import { Storychange } from 'src/app/modules/story/interfaces/storychange.interface';
+import { Storychangetype } from 'src/app/modules/story/interfaces/storychangetype.interface';
+import { StoryeventService } from 'src/app/modules/story/services/storyevent.service';
+import { Storyevent } from 'src/app/modules/story/interfaces/storyevent.interface';
 
 @Component({
 	templateUrl: './world.component.html',

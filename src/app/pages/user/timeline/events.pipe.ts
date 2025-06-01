@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Storyevent } from 'src/app/modules/storyevent/interfaces/storyevent.interface';
+import { Storyevent } from 'src/app/modules/story/interfaces/storyevent.interface';
 
 @Pipe({
 	name: 'events'

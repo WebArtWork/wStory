@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Storychangetype } from 'src/app/modules/storychangetype/interfaces/storychangetype.interface';
+import { Storychangetype } from 'src/app/modules/story/interfaces/storychangetype.interface';
 
 @Pipe({
 	name: 'types'

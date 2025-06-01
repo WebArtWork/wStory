@@ -8,7 +8,7 @@ import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interfa
 import { storychangetypeFormComponents } from '../../formcomponents/storychangetype.formcomponents';
 import { firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
-import { StorychangeService } from 'src/app/modules/storychange/services/storychange.service';
+import { StorychangeService } from 'src/app/modules/story/services/storychange.service';
 
 @Component({
 	templateUrl: './types.component.html',

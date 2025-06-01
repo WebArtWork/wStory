@@ -120,7 +120,7 @@
 				<a
 					[routerLinkActiveOptions]="{ exact: true }"
 					routerLinkActive="_activeLink"
-					routerLink="/types"
+					routerLink="/change/types"
 					class="nav__burger-link"
 					(click)="hideSidebar()"
 				>
@@ -146,6 +146,16 @@
 				>
 					<span class="material-icons">person</span>
 					<span translate>Theme.Characters</span>
+				</a>
+				<a
+					[routerLinkActiveOptions]="{ exact: true }"
+					routerLinkActive="_activeLink"
+					routerLink="/character/types"
+					class="nav__burger-link"
+					(click)="hideSidebar()"
+				>
+					<span class="material-icons">category</span>
+					<span translate>Theme.Character types</span>
 				</a>
 				<a
 					[routerLinkActiveOptions]="{ exact: true }"

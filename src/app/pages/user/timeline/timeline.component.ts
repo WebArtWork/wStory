@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Story } from 'src/app/modules/story/interfaces/story.interface';
 import { StoryService } from 'src/app/modules/story/services/story.service';
-import { Storyevent } from 'src/app/modules/storyevent/interfaces/storyevent.interface';
-import { StoryeventService } from 'src/app/modules/storyevent/services/storyevent.service';
+import { Storyevent } from 'src/app/modules/story/interfaces/storyevent.interface';
+import { StoryeventService } from 'src/app/modules/story/services/storyevent.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
