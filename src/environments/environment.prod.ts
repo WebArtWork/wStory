@@ -1,4 +1,4 @@
-import { languages } from "src/app/core/modules/translate/languages";
+import { languages } from 'src/app/core/modules/translate/languages';
 
 export const environment = {
 	roles: [],
@@ -63,5 +63,17 @@ export const environment = {
 		{ name: 'Ukrainian', origin: 'українська', code: 'uk' },
 		{ name: 'Urdu', origin: 'اردو', code: 'ur' }
 	],
-	defaultLanguageCode: 'en'
+	defaultLanguageCode: 'uk',
+	languages: [
+		{
+			code: 'en',
+			name: 'English',
+			origin: 'English'
+		},
+		{
+			code: 'uk',
+			name: 'Українська',
+			origin: 'Українська'
+		}
+	]
 };
