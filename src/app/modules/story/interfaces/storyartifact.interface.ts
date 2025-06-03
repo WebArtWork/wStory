@@ -1,6 +1,6 @@
 import { CrudDocument } from 'wacom';
 
-export interface Storyboss extends CrudDocument {
+export interface Storyartifact extends CrudDocument {
 	story: string;
 	name: string;
 	description: string;

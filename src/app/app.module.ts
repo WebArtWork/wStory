@@ -51,6 +51,19 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'artifacts',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Artifacts'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/story/pages/artifacts/artifacts.routes'
+					).then((r) => r.artifactsRoutes)
+			},
+			{
 				path: 'skills',
 				canActivate: [MetaGuard],
 				data: {
@@ -163,8 +176,8 @@ const routes: Routes = [
 					}
 				},
 				loadChildren: () =>
-					import('./modules/story/pages/stories/stories.module').then(
-						(m) => m.StoriesModule
+					import('./modules/story/pages/stories/stories.routes').then(
+						(m) => m.storiesRoutes
 					)
 			},
 			{
