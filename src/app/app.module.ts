@@ -51,6 +51,32 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'skills',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Skills'
+					}
+				},
+				loadChildren: () =>
+					import('./modules/story/pages/skills/skills.routes').then(
+						(r) => r.skillsRoutes
+					)
+			},
+			{
+				path: 'bosses',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Bosses'
+					}
+				},
+				loadChildren: () =>
+					import('./modules/story/pages/bosses/bosses.routes').then(
+						(r) => r.bossesRoutes
+					)
+			},
+			{
 				path: 'character/types',
 				canActivate: [MetaGuard],
 				data: {
