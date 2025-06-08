@@ -125,8 +125,8 @@ const routes: Routes = [
 				},
 				loadChildren: () =>
 					import(
-						'./modules/story/pages/characters/characters.module'
-					).then((m) => m.CharactersModule)
+						'./modules/story/pages/characters/characters.routes'
+					).then((r) => r.charactersRoutes)
 			},
 			{
 				path: 'locations',
