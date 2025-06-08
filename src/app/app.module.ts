@@ -150,9 +150,9 @@ const routes: Routes = [
 					}
 				},
 				loadChildren: () =>
-					import('./modules/story/pages/types/types.module').then(
-						(m) => m.TypesModule
-					)
+					import(
+						'./modules/story/pages/changetypes/changetypes.routes'
+					).then((m) => m.changetypesRoutes)
 			},
 			{
 				path: 'changes',
@@ -163,8 +163,8 @@ const routes: Routes = [
 					}
 				},
 				loadChildren: () =>
-					import('./modules/story/pages/changes/changes.module').then(
-						(m) => m.ChangesModule
+					import('./modules/story/pages/changes/changes.routes').then(
+						(m) => m.changesRoutes
 					)
 			},
 			{
