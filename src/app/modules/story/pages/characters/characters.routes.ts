@@ -6,4 +6,8 @@ export const charactersRoutes: Routes = [
 		path: '',
 		component: CharactersComponent,
 	},
+	{
+		path: ':story',
+		component: CharactersComponent,
+	},
 ];
