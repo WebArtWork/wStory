@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StorycharacterService } from '../../services/storycharacter.service';
-import { Storycharacter } from '../../interfaces/storycharacter.interface';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormService } from 'src/app/core/modules/form/form.service';
-import { TranslateService } from 'src/app/core/modules/translate/translate.service';
-import { storycharacterFormComponents } from '../../formcomponents/storycharacter.formcomponents';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { TableModule } from 'src/app/core/modules/table/table.module';
-import { CoreService, CrudComponent } from 'wacom';
-import { Router } from '@angular/router';
+import { TranslateService } from 'src/app/core/modules/translate/translate.service';
+import { CrudComponent } from 'wacom';
+import { storycharacterFormComponents } from '../../formcomponents/storycharacter.formcomponents';
+import { Storycharacter } from '../../interfaces/storycharacter.interface';
+import { StorycharacterService } from '../../services/storycharacter.service';
 import { StorycharactertypeService } from '../../services/storycharactertype.service';
 
 @Component({
@@ -30,12 +30,6 @@ export class CharactersComponent extends CrudComponent<
 		'thumb',
 		'name',
 		'description',
-		'gender',
-		'role',
-		'birth',
-		'abilities',
-		'location',
-		'type',
 		'order',
 		'data'
 	];
