@@ -1,21 +1,21 @@
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 // Core
-import { GuestComponent } from './core/theme/guest/guest.component';
-import { UserComponent } from './core/theme/user/user.component';
-import { PublicComponent } from './core/theme/public/public.component';
-import { AppComponent } from './app.component';
-import { CoreModule } from 'src/app/core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from 'src/app/core/core.module';
+import { AppComponent } from './app.component';
+import { GuestComponent } from './core/theme/guest/guest.component';
+import { PublicComponent } from './core/theme/public/public.component';
+import { UserComponent } from './core/theme/user/user.component';
 // config
-import { WacomModule, MetaGuard } from 'wacom';
 import { environment } from 'src/environments/environment';
+import { MetaGuard, WacomModule } from 'wacom';
 // guards
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AdminsGuard } from './core/guards/admins.guard';
 import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 import { GuestGuard } from './core/guards/guest.guard';
-import { AdminsGuard } from './core/guards/admins.guard';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const routes: Routes = [
 	{
@@ -50,6 +50,110 @@ const routes: Routes = [
 		component: UserComponent,
 		children: [
 			/* user */
+			{
+				path: 'units',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Units'
+					}
+				},
+				loadChildren: () =>
+					import('./modules/story/pages/units/units.routes').then(
+						(r) => r.unitsRoutes
+					)
+			},
+			{
+				path: 'worlds',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Worlds'
+					}
+				},
+				loadChildren: () =>
+					import('./modules/story/pages/worlds/worlds.routes').then(
+						(r) => r.worldsRoutes
+					)
+			},
+			{
+				path: 'quests',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Quests'
+					}
+				},
+				loadChildren: () =>
+					import('./modules/story/pages/quests/quests.routes').then(
+						(r) => r.questsRoutes
+					)
+			},
+			{
+				path: 'trades',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Trades'
+					}
+				},
+				loadChildren: () =>
+					import('./modules/story/pages/trades/trades.routes').then(
+						(r) => r.tradesRoutes
+					)
+			},
+			{
+				path: 'resources',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Resources'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/story/pages/resources/resources.routes'
+					).then((r) => r.resourcesRoutes)
+			},
+			{
+				path: 'dungeons',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Dungeons'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/story/pages/dungeons/dungeons.routes'
+					).then((r) => r.dungeonsRoutes)
+			},
+			{
+				path: 'villages',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Villages'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/story/pages/villages/villages.routes'
+					).then((r) => r.villagesRoutes)
+			},
+			{
+				path: 'buildings',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Buildings'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/story/pages/buildings/buildings.routes'
+					).then((r) => r.buildingsRoutes)
+			},
 			{
 				path: 'artifacts',
 				canActivate: [MetaGuard],

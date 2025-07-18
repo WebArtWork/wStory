@@ -6,4 +6,6 @@ export interface Storylocation extends CrudDocument {
 	thumb: string;
 	name: string;
 	description: string;
+	latitude: number;
+	longitude: number;
 }

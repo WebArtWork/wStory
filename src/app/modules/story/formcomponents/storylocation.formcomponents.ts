@@ -9,11 +9,39 @@ export const storylocationFormComponents = {
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill storylocation title',
+					value: 'fill storylocation title'
 				},
 				{
 					name: 'Label',
-					value: 'Title',
+					value: 'Title'
+				}
+			]
+		},
+		{
+			name: 'Number',
+			key: 'latitude',
+			fields: [
+				{
+					name: 'Placeholder',
+					value: 'fill location latitude'
+				},
+				{
+					name: 'Label',
+					value: 'Latitude'
+				}
+			]
+		},
+		{
+			name: 'Number',
+			key: 'longitude',
+			fields: [
+				{
+					name: 'Placeholder',
+					value: 'fill location longitude'
+				},
+				{
+					name: 'Label',
+					value: 'Longitude'
 				}
 			]
 		},
@@ -23,13 +51,13 @@ export const storylocationFormComponents = {
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill storylocation description',
+					value: 'fill storylocation description'
 				},
 				{
 					name: 'Label',
-					value: 'Description',
+					value: 'Description'
 				}
 			]
 		}
 	]
-}
+};
